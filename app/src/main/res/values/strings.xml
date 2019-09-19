@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">cpsc356</string>
+    <string name="app_name">My Clicker Game</string>
+    <string name="dont_click">don\'t click this button...</string>
+    <string name="seriously">seriously don\'t</string>
 </resources>

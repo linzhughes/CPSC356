@@ -2,4 +2,6 @@
     <string name="app_name">My Clicker Game</string>
     <string name="dont_click">don\'t click this button...</string>
     <string name="seriously">seriously don\'t</string>
+    <string name="prompt_login">hey! who are you?</string>
+    <string name="continue_login">Let\'s go</string>
 </resources>

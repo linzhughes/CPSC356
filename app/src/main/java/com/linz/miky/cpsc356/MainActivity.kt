@@ -2,39 +2,44 @@ package com.linz.miky.cpsc356
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.linz.miky.cpsc356.util.rotate90
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
   private var babyCounter: Long = 0
-  fun getStore() = getPreferences(Context.MODE_PRIVATE)
+  private fun getStore() = getPreferences(Context.MODE_PRIVATE)
+  private fun getUsername() = intent.extras?.get("username").toString().toLowerCase(Locale.US)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
     if (savedInstanceState != null) {
-      babyCounter = savedInstanceState.getLong(BABY_COUNTER_KEY, 0)
-      myTextView.text = babyCounter.toString()
+      updateCounter(savedInstanceState.getLong(BABY_COUNTER_KEY, 0))
+    } else if (getStore().contains(BABY_COUNTER_KEY)) {
+      updateCounter(getStore().getLong(getUsername(), 0))
     }
 
     myButton.setOnClickListener {
-      babyCounter++
-      myTextView.text = babyCounter.toString()
-      myImage.rotate90()
+      updateCounter(babyCounter++)
+    }
+  }
 
-      myButton.text = when (babyCounter) {
-        1L -> "stop"
-        in 2 .. 9 -> myButton.text.toString().plus("!")
-        else -> myButton.text
-      }
+  private fun updateCounter(count: Long) {
+    babyCounter = count
+    myTextView.text = babyCounter.toString()
+
+    myButton.text = when (babyCounter) {
+      1L -> "stop"
+      in 2 .. 9 -> myButton.text.toString().plus("!")
+      else -> myButton.text
     }
   }
 
   override fun onPause() {
     super.onPause()
-    getStore().edit().putLong(BABY_COUNTER_KEY, babyCounter).apply()
+    getStore().edit().putLong(getUsername(), babyCounter).apply()
   }
 
   override fun onSaveInstanceState(outState: Bundle?) {

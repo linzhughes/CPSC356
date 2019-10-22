@@ -1,10 +1,11 @@
-package com.linz.miky.cpsc356
+package com.linz.miky.cpsc356.ui
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import com.linz.miky.cpsc356.R
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
